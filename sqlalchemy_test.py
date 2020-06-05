@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 
-db_string = "postgresql://postgres:Feynman314@localhost:5432/postgres"
+db_string = "postgresql://postgres:<pwd>@localhost:5432/postgres"
 
 db = create_engine(db_string)
 

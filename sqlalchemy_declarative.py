@@ -30,7 +30,7 @@ class Address(Base):
 
 # Create an engine that stores data in the local directory's
 # sqlalchemy_example.db file.
-engine = create_engine('postgresql://postgres:Feynman314@localhost:5432/postgres')
+engine = create_engine('postgresql://postgres:<pwd>@localhost:5432/postgres')
  
 # Create all tables in the engine. This is equivalent to "Create Table"
 # statements in raw SQL.
