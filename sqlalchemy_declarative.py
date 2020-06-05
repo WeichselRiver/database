@@ -1,6 +1,6 @@
 # Use SQLALchemy declarative
 
-#import os
+import os
 #import sys
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
@@ -30,7 +30,7 @@ class Address(Base):
 
 # Create an engine that stores data in the local directory's
 # sqlalchemy_example.db file.
-engine = create_engine('postgresql://postgres:<pwd>@localhost:5432/postgres')
+engine = create_engine('postgresql://postgres:' + os.environ.get('DB_PASSWORD')+ '@localhost:5432/postgres')
  
 # Create all tables in the engine. This is equivalent to "Create Table"
 # statements in raw SQL.
