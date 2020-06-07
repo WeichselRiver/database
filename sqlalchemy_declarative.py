@@ -6,33 +6,29 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
-from pydantic import BaseModel, constr, Field
+from pydantic import BaseModel, constr, Field, ValidationError, validator
 from typing import Pattern
 
  
  
 Base = declarative_base()
  
-class Marke(Base):
+class MarkeORM(Base):
     __tablename__ = 'marke'
     # Here we define columns for the table person
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
     name = Column(String(30), nullable=False)
 
-
-class MarkeORM(BaseModel):
+class Marke(BaseModel):
     id: int
     name: constr(regex=r"^MichNr. [0-9]+$")
 
     class Config:
         orm_mode= True
 
- 
-p1_orm = MarkeORM(
-    id = "123",
-    name = "MichNr. 12 g"    
-)
+
+
 
 class Address(Base):
     __tablename__ = 'address'
@@ -55,9 +51,13 @@ class Address(Base):
 # Base.metadata.create_all(engine)
 
 
+
 try:
-    MarkeMOD = MarkeORM.from_orm(p1_orm)
-    print(p1_orm)
+    p1_orm = MarkeORM( id = "123", name = "dMichNr. 1")
+    p1 = Marke.from_orm(p1_orm)
+
+    print(p1)
+
     
 except ValidationError as e:
     print(e)
