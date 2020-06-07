@@ -25,3 +25,4 @@ print(session.query(Person).all())
 person = session.query(Person).first()
 print(person.name)
 
+ 
